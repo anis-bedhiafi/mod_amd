@@ -4,13 +4,6 @@ Asterisk app_amd for FreeSWITCH
 This is an implementation of Asterisk's answering machine detection (voice
 activity detection) for FreeSWITCH.
 
-Currently, in limited testing, we are about to get satisfactory results in
-determining what is a human and what is a machine, but there is much more to
-do:
-
-* Emit events when a decision is made (Not sure, Machine, or Human).
-* Make sure that we are unlocking and cleaning up where necessary.
-
 Building
 --------
 
@@ -40,4 +33,19 @@ Just put a file like this in your freeswitch installation, in **conf/autoload_co
     <param name="initial_silence" value="2500"/>
   </settings>
 </configuration>
+```
+Dialplan Example
+--------------------
+```xml
+    <extension name="outbound">
+        <condition field="destination_number" expression="^(.+)$">
+            <action application="set" data="continue_on_fail=false"/>
+            <action application="set" data="hangup_after_bridge=true"/>
+            <action application="set" data="sip_invite_domain=$${local_ip_v4}"/>
+            <action application="set" data="effective_caller_id_number=XXXXXXXXX"/>
+            <action application="set" data="execute_on_answer=amd"/>
+            <action application="bridge" data="sofia/external/$1@172.16.134.140:5080"/>
+            <action application="hangup"/>
+        </condition>
+    </extension>
 ```
