@@ -37,15 +37,15 @@ Just put a file like this in your freeswitch installation, in **conf/autoload_co
 Dialplan Example
 --------------------
 ```xml
-    <extension name="outbound">
-        <condition field="destination_number" expression="^(.+)$">
-            <action application="set" data="continue_on_fail=false"/>
-            <action application="set" data="hangup_after_bridge=true"/>
-            <action application="set" data="sip_invite_domain=$${local_ip_v4}"/>
-            <action application="set" data="effective_caller_id_number=XXXXXXXXX"/>
-            <action application="set" data="execute_on_answer=amd"/>
-            <action application="bridge" data="sofia/external/$1@172.16.134.140:5080"/>
-            <action application="hangup"/>
-        </condition>
-    </extension>
+<extension name="outbound">
+   <condition field="destination_number" expression="^(.+)$">
+      <action application="set" data="continue_on_fail=false"/>
+      <action application="set" data="hangup_after_bridge=true"/>
+      <action application="set" data="sip_invite_domain=$${local_ip_v4}"/>
+      <action application="set" data="effective_caller_id_number=XXXXXXXXX"/>
+      <action application="set" data="execute_on_answer=amd"/>
+      <action application="bridge" data="sofia/external/$1@172.16.134.140:5080"/>
+      <action application="hangup"/>
+   </condition>
+</extension>
 ```
