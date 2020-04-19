@@ -12,8 +12,8 @@ on `pkg-config` and FreeSWITCH, you need to point `pkg-config` to where
 FreeSWITCH is installed before building:
 
 ```
-host$ export PKG_CONFIG_PATH=/usr/local/freeswitch/lib/pkgconfig/
-host$ make
+$ export PKG_CONFIG_PATH=/usr/local/freeswitch/lib/pkgconfig/
+$ make
 ```
 
 Sample Configuration
